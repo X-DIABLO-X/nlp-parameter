@@ -28,4 +28,4 @@ RUN apt-get install -y openjdk-17-jdk && \
 EXPOSE 8000 8080
 
 # Command to run both services
-CMD ["bash", "-c", "uvicorn para:app --host 0.0.0.0 --port 8000"]
+CMD ["bash", "-c", "uvicorn para:app --host 0.0.0.0 --port 8080"]
