@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+vaderSentiment
+language_tool_python
+nltk
+groq
