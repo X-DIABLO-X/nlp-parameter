@@ -74,7 +74,7 @@ def analyze_grammar(text: str):
 
 # Helper function to calculate length score
 def length_score(sent: str):
-    min_length = 30
+    min_length = 10
     max_length = 200
     length = len(sent.split())
     if length < min_length:
@@ -103,24 +103,14 @@ async def evaluate_review(
                 {
                     "role": "system",
                     "content": (
-                     f"Evaluate the following review and provide a NUMERIC relevance score between 0 and 1.\n\n"
-                        "The score should reflect how well the review matches the context of the place being reviewed, "
-                        "considering the following criteria:\n\n"
-                        "1. Relevance: The review should mention topics relevant to the place. For example:\n"
-                        "   - If the place is a restaurant, the review should talk about food, service, ambiance, etc.\n"
-                        "   - If the place is a movie theater, the review should talk about the movie experience, sound quality, seating, etc.\n"
-                        "   - Reviews unrelated to the place's context (e.g., discussing a movie in a restaurant review) should receive a score near 0.\n\n"
-                        "2. Meaningfulness: Avoid filler words, random characters, and gibberish (e.g., \"asdfjkl\" or repeated phrases).\n\n"
-                        "3. Coherence: The review should be clear and make logical sense.\n\n"
-                        "Provide a score between 0 and 1 (with decimals) based on these criteria. A score near 1 means the review is highly relevant and meaningful, "
-                        "while a score near 0 means it is irrelevant, meaningless, or gibberish.\n\n"
+                     "Give relevancy score between 0 to 1 for the review with repective to the context given. Only give the score back nothing else. Even if the review is related somehow give some score. Only give 0 when nothing is related. Give 1 for the most related review.\n"
                         f"Context: {place_type}\n\n"
                         f"Review: \"{review_text}\"\n\n"
                         "Score:"
                     )
                 }
             ],
-            temperature=0.5,
+            temperature=0,
             max_tokens=1024,
             top_p=0.65,
             stream=False
